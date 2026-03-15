@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: incident-service
+          uri: lb://incident-service
+          predicates:
+            - Path=/api/incidents/**
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 373901753038-t1sg8kgpgrneq1ls7rm560ouhb59mjki.apps.googleusercontent.com
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope: email, profile
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
