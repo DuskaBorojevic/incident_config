@@ -17,17 +17,7 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/api/users/**
-
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: 373901753038-t1sg8kgpgrneq1ls7rm560ouhb59mjki.apps.googleusercontent.com
-            client-secret: ${GOOGLE_CLIENT_SECRET}
-            scope: email, profile
-            redirect-uri: http://localhost:8080/login/oauth2/code/google
-
+            
 eureka:
   client:
     service-url:
