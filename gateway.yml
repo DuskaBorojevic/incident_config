@@ -4,21 +4,7 @@ server:
 spring:
   application:
     name: gateway
-  cloud:
-    gateway:
-      routes:
-        - id: incident-service
-          uri: lb://incident-service
-          predicates:
-            - Path=/api/incidents/**
-          filters:
-            - TokenRelay=
-        - id: user-service
-          uri: lb://user-service
-          predicates:
-            - Path=/api/users/**
-          filters:
-            - TokenRelay=
+
   security:
     oauth2:
       client:
