@@ -4,6 +4,17 @@ server:
 spring:
   application:
     name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: incident-service
+          uri: lb://incident-service
+          predicates:
+            - Path=/api/incidents/**
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
 
   security:
     oauth2:
