@@ -7,14 +7,13 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: incident-service
-          uri: lb://incident-service
-          predicates:
-            - Path=/api/incidents/**
         - id: user-service
           uri: lb://user-service
           predicates:
             - Path=/api/users/**
+          filters:
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie
 
   security:
     oauth2:
@@ -23,7 +22,7 @@ spring:
           google:
             client-id: 373901753038-t1sg8kgpgrneq1ls7rm560ouhb59mjki.apps.googleusercontent.com
             client-secret: ${GOOGLE_CLIENT_SECRET}
-            scope: openid, email, profile  
+            scope: openid, email, profile
             redirect-uri: "{baseUrl}/login/oauth2/code/google"
 
 eureka:
